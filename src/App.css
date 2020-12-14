@@ -1,0 +1,123 @@
+.navbar {
+  background: #282c34;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(8px + 2vmin);
+  color: white;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: calc(8px + 1vmin);
+  font-weight: 500;
+  margin: 0 0 0 15px;
+}
+
+.page {
+  padding: 20px;
+}
+
+.header {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 20px 0;
+}
+
+.form {
+  margin: 0 20px 0 0;
+}
+
+.form .label {
+  margin: 0 0 5px 0;
+  font-weight: 500;
+}
+
+.form input,
+.form textarea {
+  margin: 0 0 5px 0;
+  border: 1px solid #282c34;
+  border-radius: 2px;
+  width: 20vw;
+}
+
+.form textarea {
+  height: 100px;
+}
+
+.form button {
+  margin: 0 0 20px 0;
+  width: 60px;
+  height: 25px;
+  font-size: 15px;
+  font-weight: 500;
+  background: #282c34;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.post, .album, .todo, .user {
+  background: #ebebeb;
+  border-radius: 7px;
+  margin: 0 0 10px 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.post:hover,
+.album:hover,
+.user:hover {
+  background: rgba(25, 29, 48, 0.3);
+}
+
+.album, .todo, .user {
+  display: flex;
+}
+
+.post .title {
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin: 0 0 10px 0;
+}
+
+.body {
+  font-size: 15px;
+}
+
+.folder {
+  width: 35px;
+}
+
+.album .title {
+  margin: 8px 0 0 10px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.checkbox {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.person {
+  width: 40px;
+  height: 40px;
+  margin: 0 20px 0 0;
+}
+
+.info {
+  width: 40%;
+  font-size: 15px;
+}
+
+.info .header,
+.contact .header {
+  font-weight: 500;
+  font-size: 15px;
+  margin: 0 5px 0 0;
+}
