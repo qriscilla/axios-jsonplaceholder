@@ -4,7 +4,6 @@ import axios from 'axios';
 export default class Todos extends Component {
     state = {
         todos: [],
-
         task: ''
     };
 
@@ -15,7 +14,11 @@ export default class Todos extends Component {
 
     handleChange = e => this.setState({ task: e.target.value });
 
-    handleSubmit = e => {
+    togglecheckbox = e => {
+        console.log("Can't make any real PUT requests with this API");
+    };
+
+    addTask = e => {
         e.preventDefault();
 
         const newTask = {
@@ -27,24 +30,22 @@ export default class Todos extends Component {
 
         axios
             .post(`https://jsonplaceholder.typicode.com/todos`, {newTask})
-            .then(res => console.log(res.data));
-    };
-
-    togglecheckbox = e => {
-        console.log("Can't make any real PUT requests with this API");
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
     };
 
     updateTask = e => {
         e.preventDefault();
 
-        const data = {
+        const taskToUpdate = {
             'userId': '1',
             'id': '1',
-            'title': 'Post 1 Updated Title',
+            'title': 'Task 1 Updated Title',
             'completed': false
         };
 
-          axios.put('https://jsonplaceholder.typicode.com/todos/1', data)
+          axios
+            .put('https://jsonplaceholder.typicode.com/todos/1', {taskToUpdate})
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
     };
@@ -52,9 +53,17 @@ export default class Todos extends Component {
     deleteTask = e => {
         e.preventDefault();
 
+        const taskToDelete = {
+            'userId': '1',
+            'id': '1',
+            'title': "delectus aut autem",
+            'completed': false
+        };
+
         axios
-            .delete(`https://jsonplaceholder.typicode.com/todos/1`)
-            .then(res => console.log(res.data));
+            .delete(`https://jsonplaceholder.typicode.com/todos/1`, {taskToDelete})
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
     };
 
     render() {
@@ -63,14 +72,14 @@ export default class Todos extends Component {
                 <div className='header'>Todos</div>
 
                 <div style={{display: 'flex'}}>
-                    <form className='form' onSubmit={this.handleSubmit}>
+                    <form className='form' onSubmit={this.addTask}>
                         <div className='label'>New Task:</div>
                         <input type='text' onChange={this.handleChange} /> <br />
                         <button type='submit'>Add</button>
                     </form>
 
                     <form className='form' onSubmit={this.updateTask}>
-                        <div className='label'>Click "Update" to update the first task.</div>
+                        <div className='label'>Click "Update" to fake-update the first task.</div>
                         <button type='submit'>Update</button>
                     </form>
 

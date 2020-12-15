@@ -4,7 +4,6 @@ import axios from 'axios';
 export default class Posts extends Component {
     state = {
         posts: [],
-
         title: '',
         post: '',
     };
@@ -16,7 +15,7 @@ export default class Posts extends Component {
 
     handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
-    handleSubmit = e => {
+    addPost = e => {
         e.preventDefault();
 
         const newPost = {
@@ -28,20 +27,22 @@ export default class Posts extends Component {
 
         axios
             .post(`https://jsonplaceholder.typicode.com/posts/`, {newPost})
-            .then(res => console.log(res.data));
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
     };
 
     updatePost = e => {
         e.preventDefault();
 
-        const data = {
+        const postToUpdate = {
             'userId': '1',
             'id': '1',
             'title': 'Post 1 Updated Title',
             'body': "Post 1 Updated Blog Post"
         };
 
-          axios.put('https://jsonplaceholder.typicode.com/posts/1', data)
+          axios
+            .put('https://jsonplaceholder.typicode.com/posts/1', {postToUpdate})
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
     };
@@ -49,9 +50,17 @@ export default class Posts extends Component {
     deletePost = e => {
         e.preventDefault();
 
+        const postToDelete = {
+            'userId': '1',
+            'id': '1',
+            'title': "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+            'body': "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+        };
+
         axios
-            .delete(`https://jsonplaceholder.typicode.com/posts/1`)
-            .then(res => console.log(res.data));
+            .delete(`https://jsonplaceholder.typicode.com/posts/1`, {postToDelete})
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
     };
 
     render() {
@@ -60,7 +69,7 @@ export default class Posts extends Component {
                 <div className='header'>Posts</div>
 
                 <div style={{display: 'flex'}}>
-                    <form className='form' onSubmit={this.handleSubmit}>
+                    <form className='form' onSubmit={this.addPost}>
                         <div className='label'>New Post:</div>
                         <input type='text' name='title' onChange={this.handleChange} /> <br />
                         <textarea name='post' onChange={this.handleChange} /> <br/>
@@ -68,7 +77,7 @@ export default class Posts extends Component {
                     </form>
 
                     <form className='form' onSubmit={this.updatePost}>
-                        <div className='label'>Click "Update" to update the first post.</div>
+                        <div className='label'>Click "Update" to fake-update the first post.</div>
                         <button type='submit'>Update</button>
                     </form>
 

@@ -5,7 +5,6 @@ import folder from '../folder.png';
 export default class Albums extends Component {
     state = {
         albums: [],
-
         title: ''
     };
 
@@ -16,7 +15,7 @@ export default class Albums extends Component {
 
     handleChange = e => this.setState({ title: e.target.value });
 
-    handleSubmit = e => {
+    addAlbum = e => {
         e.preventDefault();
 
         const newAlbum = {
@@ -27,19 +26,21 @@ export default class Albums extends Component {
 
         axios
             .post(`https://jsonplaceholder.typicode.com/albums`, {newAlbum})
-            .then(res => console.log(res.data));
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
     };
 
     updateAlbum = e => {
         e.preventDefault();
 
-        const data = {
+        const albumToUpdate = {
             'userId': '1',
             'id': '1',
-            'title': 'Post 1 Updated Title',
+            'title': 'Album 1 Updated Title',
         };
 
-          axios.put('https://jsonplaceholder.typicode.com/albums/1', data)
+          axios
+            .put('https://jsonplaceholder.typicode.com/albums/1', {albumToUpdate})
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
     };
@@ -47,9 +48,16 @@ export default class Albums extends Component {
     deleteAlbum = e => {
         e.preventDefault();
 
+        const albumToDelete = {
+            'userId': '1',
+            'id': '1',
+            'title': "quidem molestiae enim",
+        };
+
         axios
-            .delete(`https://jsonplaceholder.typicode.com/albums/1`)
-            .then(res => console.log(res.data));
+            .delete(`https://jsonplaceholder.typicode.com/albums/1`, {albumToDelete})
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
     };
 
     render() {
@@ -58,14 +66,14 @@ export default class Albums extends Component {
                 <div className='header'>Albums</div>
 
                 <div style={{display: 'flex'}}>
-                    <form className='form' onSubmit={this.handleSubmit}>
+                    <form className='form' onSubmit={this.addAlbum}>
                         <div className='label'>New Album Title:</div>
-                        <input type='text' name='title' onChange={this.handleChange} /> <br />
+                        <input type='text' onChange={this.handleChange} /> <br />
                         <button type='submit'>Add</button>
                     </form>
 
                     <form className='form' onSubmit={this.updateAlbum}>
-                        <div className='label'>Click "Update" to update the first album.</div>
+                        <div className='label'>Click "Update" to fake-update the first album.</div>
                         <button type='submit'>Update</button>
                     </form>
 
